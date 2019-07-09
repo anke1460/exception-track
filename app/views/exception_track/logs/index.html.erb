@@ -6,12 +6,9 @@
   }
 </script>
 <div class="toolbar">
-  <%= @logs.total_count %> exceptions
+  <%= @logs.total_entries %> exceptions
 
   <div class="pull-right">
-    <%= form_tag(export_logs_path, method: 'post') do %>
-      <button type="submit" class="btn">Export last 3 months</button>
-    <% end %>
     <%= form_tag(all_logs_path, method: 'delete') do %>
       <button type="submit" class="btn btn-danger" onclick="return confirmDestroyAll()">Delete All</button>
     <% end %>
@@ -21,7 +18,7 @@
 <% if @logs.blank? %>
   <div class="no-record">No exceptions.</div>
 <% else %>
-  <%= paginate @logs %>
+  <%= will_paginate @logs %>
 
   <table class="table table-borded tabl">
     <thead>
@@ -43,5 +40,5 @@
     </tbody>
   </table>
 
-  <%= paginate @logs %>
+  <%= will_paginate @logs %>
 <% end %>
